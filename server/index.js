@@ -11,6 +11,7 @@ import { fileURLToPath } from "url";
 import { ErrorMiddleware } from "./middleware/errorMiddleware.js";
 import authRouter from "./router/authRouter.js";
 import postRouter from "./router/postRouter.js";
+import commitRouter from "./router/commitRouter.js";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
@@ -47,6 +48,7 @@ const limiter = rateLimit({
 app.use("/api", limiter);
 app.use("/api/auth", authRouter);
 app.use("/api/post", postRouter);
+app.use("/api/commit",commitRouter);
 
 io.on("connection", (socket) => {
   console.log("User connected");
