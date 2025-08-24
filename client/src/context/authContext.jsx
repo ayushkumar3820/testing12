@@ -13,7 +13,7 @@ export const AuthProvider = ({ children }) => {
       if (token) {
         axios.defaults.headers.common['x-auth-token'] = token;
         try {
-          const res = await axios.get('/api/auth/user');
+          const res = await axios.get('http://localhost:5000/api/auth/user');
           setUser(res.data);
         } catch (err) {
           console.error(err);
@@ -26,7 +26,7 @@ export const AuthProvider = ({ children }) => {
 
   const register = async (formData) => {
     try {
-      const res = await axios.post('/api/auth/register', formData, {
+      const res = await axios.post('http://localhost:5000/api/auth/register', formData, {
         headers: { 'Content-Type': 'multipart/form-data' },
       });
       localStorage.setItem('token', res.data.token);
@@ -40,7 +40,7 @@ export const AuthProvider = ({ children }) => {
 
   const login = async (formData) => {
     try {
-      const res = await axios.post('/api/auth/login', formData);
+      const res = await axios.post('http://localhost:5000/api/auth/login', formData);
       localStorage.setItem('token', res.data.token);
       axios.defaults.headers.common['x-auth-token'] = res.data.token;
       const userRes = await axios.get('/api/auth/user');
